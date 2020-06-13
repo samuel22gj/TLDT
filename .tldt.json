@@ -1,0 +1,27 @@
+{
+  "configuration": {
+    "sortByKey": true
+  },
+  "actions": [
+    {
+      "key": "1",
+      "description": "simple command",
+      "command": "ls"
+    },
+    {
+      "key": "3",
+      "description": "execute two commands sequentially",
+      "command": "sleep 2; ls"
+    },
+    {
+      "key": "2",
+      "description": "command with argument",
+      "command": "ls -l"
+    },
+    {
+      "key": "4",
+      "description": "command with pipeline",
+      "command": "ls -l | grep tldt"
+    }
+  ]
+}
