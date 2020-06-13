@@ -64,7 +64,7 @@ def show_execution_time_info(start_time: datetime, end_time: datetime):
 def main():
     # Check file exists
     if not os.path.exists(JSON_FILENAME):
-        print(f'{JSON_FILENAME} not exist.')
+        print(f'ERROR: {JSON_FILENAME} not exist.')
         sys.exit(1)
 
     # Parse file
@@ -72,13 +72,13 @@ def main():
         try:
             tldt = json.load(f)
         except:
-            print(f'Parsing {JSON_FILENAME} failed.')
+            print(f'ERROR: Parsing {JSON_FILENAME} failed.')
             sys.exit(1)
 
     # Check "actions" node exists and at least one action
     actions = tldt['actions']
     if type(actions) is not list or len(actions) < 1:
-        print(f'There is no action.')
+        print(f'ERROR: There is no action.')
         sys.exit(1)
 
     # Parse "configuration"
@@ -117,7 +117,7 @@ def main():
     try:
         action = next(d for i, d in enumerate(actions) if d[JSON_NAME_KEY] == key)
     except:
-        print('Action not found.')
+        print('ERROR: Action not found.')
         sys.exit(1)
 
     # Record start time if need
