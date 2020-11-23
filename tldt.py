@@ -25,11 +25,24 @@ from datetime import datetime, timedelta
 VERSION = 'v1.0.0'
 
 JSON_FILENAME = '.tldt.json'
+JSON_NAME_CONFIGURATION = 'configuration'
+JSON_NAME_ACTIONS = 'actions'
 JSON_NAME_KEY = 'key'
 JSON_NAME_DESC = 'description'
 JSON_NAME_CMD = 'command'
 
 ACTION_KEY_QUIT = 'q'
+
+
+def create_sample_file():
+    content = '{"configuration":{"sortByKey":true},"actions":[{"key":"1","description":"simple command","command":"ls"}]}'
+    tldt = json.loads(content)
+    with open(JSON_FILENAME, 'w', encoding='utf-8') as f:
+        try:
+            json.dump(obj=tldt, fp=f, indent=2)
+        except:
+            print(f'ERROR: Creating {JSON_FILENAME} failed.')
+            sys.exit(1)
 
 
 def show_action_table(actions: list):
@@ -62,9 +75,26 @@ def show_execution_time_info(start_time: datetime, end_time: datetime):
 
 
 def main():
+    parser = argparse.ArgumentParser(prog='tldt', description="Too Long; Didn't Type.")
+    parser.add_argument('--version', '-v', action='version', version=f'TLDT {VERSION}')
+    parser.add_argument('--init', action='store_true', help=f'create a sample {JSON_FILENAME} file in the current directory')
+    parser.add_argument('--no-time', '-nt', action='store_true', help="don't show execution time information")
+    parser.add_argument('key', type=str, nargs='?', help='a key of the action')
+    args = parser.parse_args()
+    # print(args)
+
+    # Create a sample file if the user wants
+    if args.init:
+        if os.path.exists(JSON_FILENAME):
+            print(f'ERROR: {JSON_FILENAME} already exist.')
+            sys.exit(1)
+        else:
+            create_sample_file()
+            sys.exit(0)
+
     # Check file exists
     if not os.path.exists(JSON_FILENAME):
-        print(f'ERROR: {JSON_FILENAME} not exist.')
+        print(f'ERROR: {JSON_FILENAME} not exist. Run "tldt --init" to create one!')
         sys.exit(1)
 
     # Parse file
@@ -76,25 +106,17 @@ def main():
             sys.exit(1)
 
     # Check "actions" node exists and at least one action
-    actions = tldt['actions']
+    actions = tldt[JSON_NAME_ACTIONS]
     if type(actions) is not list or len(actions) < 1:
         print(f'ERROR: There is no action.')
         sys.exit(1)
 
     # Parse "configuration"
     sort_by_key = False
-    if 'configuration' in tldt:
-        configuration = tldt['configuration']
+    if JSON_NAME_CONFIGURATION in tldt:
+        configuration = tldt[JSON_NAME_CONFIGURATION]
         if configuration['sortByKey'] is True:
             sort_by_key = True
-
-    # Parse argument
-    parser = argparse.ArgumentParser(prog='tldt', description="Too Long; Didn't Type.")
-    parser.add_argument('--version', '-v', action='version', version=f'TLDT {VERSION}')
-    parser.add_argument('--no-time', '-nt', action='store_true', help="don't show execution time information")
-    parser.add_argument('key', type=str, nargs='?', help='a key of the action')
-    args = parser.parse_args()
-    # print(args)
 
     if args.key:
         # Take the key from argument
