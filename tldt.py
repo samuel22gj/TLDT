@@ -22,7 +22,7 @@ import os
 import sys
 from datetime import datetime, timedelta
 
-VERSION = 'v1.0.0'
+VERSION = 'v1.0.1'
 
 JSON_FILENAME = '.tldt.json'
 JSON_NAME_CONFIGURATION = 'configuration'

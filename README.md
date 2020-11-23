@@ -14,7 +14,7 @@ Prerequisite
 
 Create a `.tldt.json` file and place in wherever you would like to execute(e.g., root path of a project ).
 
-You can follow the example [.tldt.json](.tldt.json) file to create your own one.
+You can follow the example [.tldt.json](.tldt.json) file to create your own one or run `tldt --init` to create a sample.
 
 ```json5
 {
@@ -35,6 +35,12 @@ You can follow the example [.tldt.json](.tldt.json) file to create your own one.
 Usage
 -----
 
+Create a sample `.tldt.json` file in the current directory
+
+```text
+$ tldt --init
+```
+
 View all of commands on command-line:
 
 ```text
@@ -51,7 +57,7 @@ Command Argument
 ----------------
 
 ```
-usage: tldt [-h] [--version] [--no-time] [key]
+usage: tldt [-h] [--version] [--no-time] [--init] [key]
 
 Too Long; Didn't Type.
 
@@ -61,6 +67,7 @@ positional arguments:
 optional arguments:
   -h, --help      show this help message and exit
   --version, -v   show program's version number and exit
+  --init          create a sample .tldt.json file in the current directory
   --no-time, -nt  don't show execution time information
 ```
 
