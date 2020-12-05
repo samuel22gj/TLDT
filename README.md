@@ -2,7 +2,7 @@ TL;DT
 =====
 
 > Too Long; Didn't Type
- 
+
 Do you maintain a note to collect a bunch of commands? And copy/paste when you want to use it?
 
 `tldt` can help you collect commands that are long and difficult to remember. You can view all of these on command-line and enter the key you define for each command. `tldt` will execute it and show the execution time information for you!
@@ -37,21 +37,21 @@ Usage
 
 Create a sample `.tldt.json` file in the current directory
 
-```text
+```
 $ tldt --init
 ```
 
 View all of commands on command-line:
 
-```text
+```
 $ tldt
 ```
 
 Execute specific command directly
 
-```text
+```
 $ tldt [key]
-```  
+```
 
 Command Argument
 ----------------
@@ -79,11 +79,18 @@ Dependency
 Install
 -------
 
-Get the script
+### macOS
 
-- Manually
-  - Download the `tldt.py` and place it on your `PATH`
-  - Rename to `tldt` (remove filename extension `.py`
+```
+$ brew install samuel22gj/repo/tldt
+```
+
+### Manually
+
+1. Download `tldt.py` from [latest release](https://github.com/samuel22gj/TLDT/releases/latest)
+1. Run `chmod +x tldt.py`
+1. Place it on your `$PATH`
+1. Rename to `tldt` (remove filename extension `.py`)
 
 License
 -------
