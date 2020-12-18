@@ -67,7 +67,7 @@ def show_action_table(actions: list):
 def show_execution_time_info(start_time: datetime, end_time: datetime):
     print('   Execution Time Information')
     print('=================================')
-    datetime_format = '%Y-%m-%d %H:%m:%S'
+    datetime_format = '%Y-%m-%d %H:%M:%S'
     print(f'  Start Time: {start_time.strftime(datetime_format)}')
     print(f'    End Time: {end_time.strftime(datetime_format)}')
     elapsed_time = end_time - start_time
